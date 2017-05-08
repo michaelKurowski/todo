@@ -21,15 +21,16 @@ router.post('/', (req, res) => {
 
 router.get('/:username', (req, res) => {
 	const username = req.params.username
-	const password = req.params.password
 	Users.findOne(
-		{username, password},
+		{username},
 		(err, results) => {
 			if (err) {
 				throwErrorLog(req.originalUrl, err)
 				res.send('An error occured. Check server logs for details.')
 				throw err
 			} else {
+				console.log(results)
+				if (results === null) return results
 				res.send(results._id)
 			}
 		}
