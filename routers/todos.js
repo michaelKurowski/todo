@@ -3,21 +3,25 @@ const Todos = require('../models/todoModel.js')
 const express = require('express')
 const router = express.Router()
 const fs = require('fs')
+const throwErrorLog = require('../utilsFunctions').throwErrorLog
 router.post('/', (req, res) => {
-
+	const todo = req.body
+	Todos.create(todo, (err, results) => {
+		if (err) {
+			throwErrorLog(req.originalUrl, err)
+		} else {
+			res.send(results)
+		}
+	})
 })
 
 router.get('/:username', (req, res) => {
 	console.log('/:username')
-	Todos.find({
-			username: req.params.username
-		},
+	Todos.find(
+		{username: req.params.username},
 		(err, results) => {
 			if (err) {
-				res.send('An error occured. Check server logs for details.')
-				fs.writeFile('logs.txt', `[${new Date()}] /${req.body.username} - ${err}`, err => {
-					console.log(`[${new Date()}] /${req.body.username} - ${err}`)
-				})
+				throwErrorLog(req.originalUrl, err)
 			} else {
 				res.send(results)
 			}

@@ -1,8 +1,7 @@
 const Todos = require('../models/todoModel')
 const randomNumber = require('random-number')
-const fs = require('fs')
 const cfg = require('./config.json')
-
+const throwErrorLog = require('../utilsFunctions').throwErrorLog
 const express = require('express')
 const router = express.Router()
 
@@ -33,10 +32,7 @@ router.post('/', (req, res) => {
 	}
 	Todos.create(starterTodos, (err, results) => {
 		if (err) {
-			res.send('An error occured during initializing seed db. Check server logs for details.')
-			fs.writeFile('logs.txt', `[${new Date()}] /api/setupTodos - ${err}`, err => {
-				console.log(`[${new Date()}] /api/setupTodos - ${err}`)
-			})
+			throwErrorLog(req.originalUrl, err)
 		} else {
 			res.send(starterTodos)
 		}
