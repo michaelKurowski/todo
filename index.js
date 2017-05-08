@@ -1,0 +1,15 @@
+const express = require('express')
+const app = express()
+const bodyParser = require('body-parser')
+const mongoose = require('mongoose')
+const cfg = require('./config')
+const port = cfg.getWebServerPort()
+
+const setupController = require('./controllers/setupController.js')
+
+app.use('/assets', express.static(`${__dirname}/public`))
+app.use(bodyParser.json())
+app.set('view-engine', 'ejs')
+app.post('/api/setupTodos', setupController)
+mongoose.connect(cfg.getDbConnectionString())
+app.listen(port)
