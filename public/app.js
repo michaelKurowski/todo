@@ -18,21 +18,25 @@ function todosCtrl($scope, $http) {
 		)
 	}, true);
 	$scope.add = function() {
-		const user = {
-			userId: this.userId ,
-			todo: this.todoText,
-			hasAttachment: this.hasAttachment,
-			isDone: this.isDone
-		}
-		$http.post('/api/todos/', user)
-		.then(
-			response => {
-				$scope.todosList.push(response.data)
-			},
-			err => {
-				console.log(err)
+
+		if (this.todoText !== '') {
+			const user = {
+				userId: this.userId ,
+				todo: this.todoText,
+				hasAttachment: this.hasAttachment,
+				isDone: this.isDone
 			}
-		)
+			$http.post('/api/todos/', user)
+			.then(
+				response => {
+					$scope.todosList.push(response.data)
+				},
+				err => {
+					console.log(err)
+				}
+			)
+		}
+
 	}
 	$scope.delete = function(id) {
 		$http({

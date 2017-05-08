@@ -44,4 +44,18 @@ router.delete('/:id', (req, res) => {
 		}
 	})
 })
+
+router.patch('/:id', (req, res) => {
+	const _id = req.params.id
+	const newObj = request.body
+	Model.update({_id}, newObj)
+	.then(
+		results => res.send(results),
+		err => {
+			throwErrorLog(req.originalUrl, err)
+			res.send('An error occured. Check server logs for details.')
+			throw err
+		}
+	)
+})
 module.exports = router
