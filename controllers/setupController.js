@@ -1,40 +1,13 @@
 const Todos = require('../models/todoModel')
 const randomNumber = require('random-number')
 const fs = require('fs')
-
+const cfg = require('./config.json')
 module.exports = (req, res) => {
 	const amount = req.body.amount
 	//seed db
-	const verbs = [
-		'buy',
-		'bring',
-		'order',
-		'take',
-		'keeping calm and thinking about',
-		'write poem about'
-	]
-
-	const nouns = [
-		'milk',
-		'ham',
-		'bread',
-		'monkey',
-		'cake',
-		'tickets',
-	]
-
-	const usernames = [
-		'Mikey',
-		'Jordan',
-		'Marcin',
-		'Matt',
-		'Sonia',
-		'Simon',
-		'Natasha',
-		'Sasha',
-		'Jedi0092',
-		'Zolty'
-	]
+	const verbs = cfg.seedGeneratorStrings.verbs
+	const nouns = cfg.seedGeneratorStrings.nouns
+	const usernames = cfg.seedGeneratorStrings.usernames
 	let starterTodos = []
 	for (let i = 0 ; i < amount ; i++) {
 		const randomUsername = usernames[
@@ -46,12 +19,13 @@ module.exports = (req, res) => {
 		const randomVerb = verbs[
 			randomNumber({min: 0, max: verbs.length - 1, integer: true})
 		]
-		starterTodos.push({
+		const seedObject = {
 			username: randomUsername,
 			todo: `${randomVerb} ${randomNoun}`,
 			isDone: Math.random() > 0.5,
 			hasAttachment: Math.random() > 0.5
-		})
+		}
+		starterTodos.push(seedObject)
 	}
 	Todos.create(starterTodos, (err, results) => {
 		if (err) {
@@ -60,7 +34,7 @@ module.exports = (req, res) => {
 				console.log(`[${new Date()}] /api/setupTodos - ${err}`)
 			})
 		} else {
-			res.send('Done')
+			res.send(starterTodos)
 		}
 	})
 }
