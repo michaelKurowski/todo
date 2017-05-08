@@ -2,7 +2,11 @@ const Todos = require('../models/todoModel')
 const randomNumber = require('random-number')
 const fs = require('fs')
 const cfg = require('./config.json')
-module.exports = (req, res) => {
+
+const express = require('express')
+const router = express.Router()
+
+router.post('/', (req, res) => {
 	const amount = req.body.amount
 	//seed db
 	const verbs = cfg.seedGeneratorStrings.verbs
@@ -37,4 +41,6 @@ module.exports = (req, res) => {
 			res.send(starterTodos)
 		}
 	})
-}
+})
+
+module.exports = router
