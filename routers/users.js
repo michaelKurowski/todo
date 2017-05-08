@@ -29,7 +29,6 @@ router.get('/:username', (req, res) => {
 				res.send('An error occured. Check server logs for details.')
 				throw err
 			} else {
-				console.log(results)
 				if (results === null) return results
 				res.send(results._id)
 			}
