@@ -1,11 +1,11 @@
 const app = angular.module('ToDo app', [])
 function todosCtrl($scope, $http) {
 	this.title = 'ToDo app'
-	$scope.userId = '5910e3727c4a255ee077279e'
+	$scope.userId = ''
 	$scope.todosList = []
 	$scope.hasAttachment = false
 	$scope.isDone = false
-	$scope.username = false
+	$scope.username = ''
 	$scope.$watch('username', function() {
 		$http.get(
 			`/api/users/${$scope.username}`
