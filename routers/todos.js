@@ -2,7 +2,6 @@ const mongoose = require('mongoose')
 const Todos = require('../models/todoModel.js')
 const express = require('express')
 const router = express.Router()
-const fs = require('fs')
 const throwErrorLog = require('../utilsFunctions').throwErrorLog
 router.post('/', (req, res) => {
 	const todo = req.body
@@ -16,7 +15,6 @@ router.post('/', (req, res) => {
 })
 
 router.get('/:username', (req, res) => {
-	console.log('/:username')
 	Todos.find(
 		{username: req.params.username},
 		(err, results) => {
