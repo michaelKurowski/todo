@@ -1,0 +1,8 @@
+.center-block {
+	margin: 0px auto;
+	float: none;
+}
+.addButton {
+	font-size: 120%;
+	margin: 5px;
+}
