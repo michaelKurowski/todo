@@ -33,6 +33,7 @@ router.post('/', (req, res) => {
 	Todos.create(starterTodos, (err, results) => {
 		if (err) {
 			throwErrorLog(req.originalUrl, err)
+			throw err
 		} else {
 			res.send(starterTodos)
 		}

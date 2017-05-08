@@ -8,6 +8,7 @@ router.post('/', (req, res) => {
 	Todos.create(todo, (err, results) => {
 		if (err) {
 			throwErrorLog(req.originalUrl, err)
+			throw err
 		} else {
 			res.send(results)
 		}
@@ -20,6 +21,7 @@ router.get('/:username', (req, res) => {
 		(err, results) => {
 			if (err) {
 				throwErrorLog(req.originalUrl, err)
+				throw err
 			} else {
 				res.send(results)
 			}
@@ -28,6 +30,14 @@ router.get('/:username', (req, res) => {
 })
 
 router.delete('/:username', (req, res) => {
-
+	const id = req.body.id
+	Todos.findByIdAndRemove(id, (err, results) => {
+		if (err) {
+			throwErrorLog(req.originalUrl, err)
+			throw err
+		} else {
+			res.send(results)
+		}
+	})
 })
 module.exports = router
