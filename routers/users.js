@@ -4,23 +4,13 @@ const express = require('express')
 const router = express.Router()
 const throwErrorLog = require('../utilsFunctions').throwErrorLog
 router.post('/', (req, res) => {
-	const todo = req.body
-	Users.create(todo, (err, results) => {
-		if (err) {
-			throwErrorLog(req.originalUrl, err)
-			throw err
-		} else {
-			res.send(results)
-		}
-	})
-})
-
-router.get('/:id', (req, res) => {
-	Users.find(
-		{username: req.params.username},
+	const user = req.body
+	Users.create(
+		user,
 		(err, results) => {
 			if (err) {
 				throwErrorLog(req.originalUrl, err)
+				res.send('An error occured. Check server logs for details.')
 				throw err
 			} else {
 				res.send(results)
@@ -29,11 +19,30 @@ router.get('/:id', (req, res) => {
 	)
 })
 
+router.get('/:username', (req, res) => {
+	const username = req.params.username
+	const password = req.params.password
+	Users.findOne(
+		{username, password},
+		(err, results) => {
+			if (err) {
+				throwErrorLog(req.originalUrl, err)
+				res.send('An error occured. Check server logs for details.')
+				throw err
+			} else {
+				res.send(results._id)
+			}
+		}
+	)
+})
+
 router.delete('/:id', (req, res) => {
 	const id = req.params.id
+
 	Users.findByIdAndRemove(id, (err, results) => {
 		if (err) {
 			throwErrorLog(req.originalUrl, err)
+			res.send('An error occured. Check server logs for details.')
 			throw err
 		} else {
 			res.send(results)
