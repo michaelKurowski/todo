@@ -3,7 +3,7 @@ const Schema = mongoose.Schema
 
 
 const todoSchema = new Schema({
-	usernameId: Objectid,
+	userId: String,
 	todo: String,
 	isDone: Boolean,
 	hasAttachment: Boolean
