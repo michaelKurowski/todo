@@ -1,15 +1,34 @@
 const app = angular.module('ToDo app', [])
 function todosCtrl($scope, $http) {
 	this.title = 'ToDo app'
-	$scope.username = 'testMikey'
+	$scope.userId = '5910e3727c4a255ee077279e'
+	$scope.todosList = []
+	$scope.hasAttachment = false
+	$scope.isDone = false
 	$scope.add = function() {
+		const user = {
+			userId: this.userId,
+			todo: this.todoText,
+			hasAttachment: this.hasAttachment,
+			isDone: this.isDone
+		}
+		console.log(user)
 		$http.post(
 			'/api/todos/',
-			{
-				username: this.username,
-				todo: this.todoText,
-				hasAttachment: this.hasAttachment,
-				isDone: this.isDone
+			user
+		).then(
+			response => {
+				$scope.todosList.push(response.data)
+			},
+			err => {
+				console.log(err)
+			}
+		)
+	}
+	$scope.delete = function(id) {
+		$http({
+				method: 'DELETE',
+				url: `/api/todos/${id}`
 			}
 		).then(
 			response => {
@@ -20,6 +39,17 @@ function todosCtrl($scope, $http) {
 			}
 		)
 	}
+	setInterval(() => {
+		$http.get(
+			`/api/todos/${$scope.userId}`
+		).then(
+			response => $scope.todosList = response.data
+			,
+			err => console.log(err)
+		)
+		},
+		1000
+	)
 }
 
 

@@ -21,4 +21,11 @@
 			</div>
 		</div>
 	</div>
+	<div clas='row' ng-repeat='todo in todosList'>
+		<div class='col-md-8 center-block'>
+			<div class='row bg-primary' ng-click='delete(todo._id)'>
+				<h2 class='test-secondary '>{{todo.todo}}</h2>
+			</div>
+		</div>
+	</div>
 </body>
