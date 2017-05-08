@@ -29,8 +29,8 @@ router.get('/:username', (req, res) => {
 	)
 })
 
-router.delete('/:username', (req, res) => {
-	const id = req.body.id
+router.delete('/:id', (req, res) => {
+	const id = req.params.id
 	Todos.findByIdAndRemove(id, (err, results) => {
 		if (err) {
 			throwErrorLog(req.originalUrl, err)
