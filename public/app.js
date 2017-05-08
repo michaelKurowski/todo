@@ -5,18 +5,27 @@ function todosCtrl($scope, $http) {
 	$scope.todosList = []
 	$scope.hasAttachment = false
 	$scope.isDone = false
+	$scope.username = false
+	$scope.$watch('username', function() {
+		$http.get(
+			`/api/users/${$scope.username}`
+		).then(
+			response => {
+				if (response === null) return Promise.reject('No such user found')
+				$scope.userId = response.data
+			},
+			err => console.log(err)
+		)
+	}, true);
 	$scope.add = function() {
 		const user = {
-			userId: this.userId,
+			userId: this.userId ,
 			todo: this.todoText,
 			hasAttachment: this.hasAttachment,
 			isDone: this.isDone
 		}
-		console.log(user)
-		$http.post(
-			'/api/todos/',
-			user
-		).then(
+		$http.post('/api/todos/', user)
+		.then(
 			response => {
 				$scope.todosList.push(response.data)
 			},
