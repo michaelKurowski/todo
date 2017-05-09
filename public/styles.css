@@ -6,3 +6,14 @@
 	font-size: 120%;
 	margin: 5px;
 }
+
+.task {
+	border-radius: 20px;
+	margin: 5px;
+}
+
+.vcenter {
+    display: inline-block;
+    vertical-align: middle;
+    float: none;
+}

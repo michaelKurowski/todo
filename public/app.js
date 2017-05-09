@@ -13,12 +13,12 @@ function todosCtrl($scope, $http) {
 			response => {
 				if (response === null) return Promise.reject('No such user found')
 				$scope.userId = response.data
+				$scope.refresh()
 			},
 			err => console.log(err)
 		)
 	}, true);
 	$scope.add = function() {
-
 		if (this.todoText !== '') {
 			const user = {
 				userId: this.userId ,
@@ -29,7 +29,7 @@ function todosCtrl($scope, $http) {
 			$http.post('/api/todos/', user)
 			.then(
 				response => {
-					$scope.todosList.push(response.data)
+					$scope.refresh()
 				},
 				err => {
 					console.log(err)
@@ -39,6 +39,7 @@ function todosCtrl($scope, $http) {
 
 	}
 	$scope.delete = function(id) {
+
 		$http({
 				method: 'DELETE',
 				url: `/api/todos/${id}`
@@ -46,13 +47,14 @@ function todosCtrl($scope, $http) {
 		).then(
 			response => {
 				console.log(response.data)
+				$scope.refresh()
 			},
 			err => {
 				console.log(err)
 			}
 		)
 	}
-	setInterval(() => {
+	$scope.refresh = function () {
 		$http.get(
 			`/api/todos/${$scope.userId}`
 		).then(
@@ -60,10 +62,10 @@ function todosCtrl($scope, $http) {
 			,
 			err => console.log(err)
 		)
-		},
-		1000
-	)
+	}
+	setInterval($scope.refresh, 1000)
 }
+
 
 
 app.controller('ToDos', ['$scope', '$http', todosCtrl])
