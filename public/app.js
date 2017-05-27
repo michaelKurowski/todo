@@ -18,6 +18,14 @@ function todosCtrl($scope, $http) {
 			err => console.log(err)
 		)
 	}, true);
+	$scope.keypress = function(ev) {
+		if (ev.originalEvent.keyCode === 13) {
+			$scope.add()
+		}
+	}
+	$scope.genToken = function() {
+		alert()
+	}
 	$scope.add = function() {
 		if (this.todoText !== '') {
 			const user = {

@@ -1,2 +1,3 @@
 # todo
-Simple ToDo app
+Simple ToDo app, for dispatching tasks.
+

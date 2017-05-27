@@ -8,7 +8,7 @@
 	<link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css'>
 	<link rel='stylesheet' href='/assets/styles.css'>
 </head>
-<body ng-app='ToDo app' class='container-fluid bg-secondary' ng-controller='ToDos as td' >
+<body ng-app='ToDo app' class='container-fluid bg-secondary' ng-keypress='keypress($event)' ng-controller='ToDos as td' >
 	<div clas='row'>
 		<h1 class='text-primary text-center'>{{td.title}}</h1>
 	</div>
@@ -21,15 +21,18 @@
 			<div class='row'>
 				<input class='col-md-4' default='My name' ng-model='this.username'>
 				<input class='col-md-8' default='My new Task' ng-model='this.todoText'>
-				<i class='fa fa-plus-circle addButton text-primary' aria-hidden='true' ng-click='add()'></i>
 			</div>
 		</div>
 	</div>
 	<div clas='row' ng-repeat='todo in todosList'>
 		<div class='col-md-8 center-block'>
 			<div class='row bg-primary task' ng-click='delete(todo._id)'>
-				<h2 class='test-secondary vcenter p-0'>{{todo.todo}}</h2>
+				<span><h2 class='test-secondary vcenter p-0'>{{todo.todo}}</h2></span>
 			</div>
 		</div>
 	</div>
+	<div class='text-center row float-bottom'>
+		<h1 ng-click='genToken()'>Click to generate a new token</h1>
+	</div>
+
 </body>

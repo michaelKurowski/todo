@@ -10,10 +10,23 @@
 .task {
 	border-radius: 20px;
 	margin: 5px;
+	text-align: center;
+	vertical-align: middle;
+	padding: 5px;
+}
+h2 {
+	margin: 0px;
+	padding: 0px;
 }
 
 .vcenter {
     display: inline-block;
     vertical-align: middle;
     float: none;
+}
+
+.float-bottom {
+	position: absolute;
+	top: 90%;
+	width: 100%;
 }

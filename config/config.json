@@ -1,6 +1,6 @@
 {
-	"webServerPort": "",
-	"dbAddress": "",
-	"dbUser": "",
-	"dbPassword": ""
+	"webServerPort": "80",
+	"dbAddress": "ds133221.mlab.com:33221/blue-da-be",
+	"dbUser": "bya",
+	"dbPassword": "Passw0rd!"
 }
