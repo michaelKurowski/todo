@@ -1,5 +1,5 @@
 # About
-This app allows users to dispatch messages for various rooms, named as tokens. To proceed, user just need to type name of the room, and then just manage messages by adding them and deleting.
+This app allows users to dispatch messages for various rooms (known as tokens). To proceed, user just need to type name of the room, and then just manage messages by adding them and deleting.
 # Language
  - **Database** MongoDB
  - **Web Server** JavaScript
@@ -20,6 +20,6 @@ NodeJS 6.10.0 or later
 # Deployment
 
 1. Install NodeJS 6.10.0 or higher.
-2. Run npm i --production in app directory
-3. Fill /cofig/config.json with appropiate data
-4. Run npm start in main app directory
+2. Run npm i --production in app directory.
+3. Fill /cofig/config.json with appropiate data.
+4. Run npm start in main app directory.
