@@ -8,31 +8,33 @@
 	<link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css'>
 	<link rel='stylesheet' href='/assets/styles.css'>
 </head>
-<body ng-app='ToDo app' class='container-fluid bg-secondary' ng-keypress='keypress($event)' ng-controller='ToDos as td' >
+<body ng-app='ToDo app' class='container-fluid bg-secondary' ng-keypress='keypress($event)' ng-controller='ToDos as td'>
 	<div clas='row'>
 		<h1 class='text-primary text-center'>{{td.title}}</h1>
 	</div>
-	<div clas='row'>
-		<div class='col-md-8 center-block'>
+	<div clas='row '>
+		<div class='col-md-8 center-block jumbotron'>
 			<div class='row'>
-				<div class='col-md-4'><h2>Token</h2></div>
-				<div class='col-md-8'><h2>Task to add</h2></div>
+				<div class='col-md-4'><h3>>Token</h3></div>
+				<input class='col-md-4 form-control' default='My name' ng-model='this.username'>
+				
 			</div>
-			<div class='row'>
-				<input class='col-md-4' default='My name' ng-model='this.username'>
-				<input class='col-md-8' default='My new Task' ng-model='this.todoText'>
+			<div class='row '>
+				<div class='col-md-8'><h3>>Task to add</h3></div>
+				<input class='col-md-8 form-control' default='My new Task' ng-model='this.todoText'>
 			</div>
 		</div>
 	</div>
-	<div clas='row' ng-repeat='todo in todosList'>
-		<div class='col-md-8 center-block'>
-			<div class='row bg-primary task' ng-click='delete(todo._id)'>
-				<span><h2 class='test-secondary vcenter p-0'>{{todo.todo}}</h2></span>
+	<div class='row'>
+		<div class='col-md-12'></div>
+	</div>
+	<div class='row '>
+		<div class='row' ng-repeat='todo in todosList'>
+			<div class='col-md-8 center-block'>
+				<div class='row well-md bg-primary task' ng-click='delete(todo._id)'>
+					<span><h2 class='test-secondary vcenter p-0'>{{todo.todo}}</h2></span>
+				</div>
 			</div>
 		</div>
 	</div>
-	<div class='text-center row float-bottom'>
-		<h1 ng-click='genToken()'>Click to generate a new token (inactive)</h1>
-	</div>
-
 </body>

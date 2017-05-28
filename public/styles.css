@@ -30,3 +30,8 @@ h2 {
 	top: 90%;
 	width: 100%;
 }
+
+body {
+	background-color: #e5e5e5;
+	overflow-x: hidden;
+}
