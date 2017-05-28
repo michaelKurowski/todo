@@ -1,5 +1,5 @@
 const mongoose = require('mongoose')
-const Tokens = require('../models/userModel.js')
+//const Tokens = require('../models/userModel.js')
 const Tokens = require('../models/tokenModel.js')
 const express = require('express')
 const router = express.Router()
@@ -9,12 +9,11 @@ const throwErrorLog = require('../utilsFunctions').throwErrorLog
 router.post('/', (req, res) => {
 	const token = req.body
 	Tokens.create(
-		user,
+		token,
 		(err, results) => {
 			if (err) {
 				throwErrorLog(req.originalUrl, err)
 				res.send('An error occured. Check server logs for details.')
-				throw err
 			} else {
 				res.send(results)
 			}

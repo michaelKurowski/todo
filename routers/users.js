@@ -1,5 +1,5 @@
 const mongoose = require('mongoose')
-const Users = require('../models/userModel.js')
+const Tokens = require('../models/tokenModel.js')
 const express = require('express')
 const router = express.Router()
 const throwErrorLog = require('../utilsFunctions').throwErrorLog
@@ -21,7 +21,7 @@ router.post('/', (req, res) => {
 
 router.get('/:username', (req, res) => {
 	const username = req.params.username
-	Users.findOne(
+	Tokens.findOne(
 		{username},
 		(err, results) => {
 			if (err) {
@@ -39,7 +39,7 @@ router.get('/:username', (req, res) => {
 router.delete('/:id', (req, res) => {
 	const id = req.params.id
 
-	Users.findByIdAndRemove(id, (err, results) => {
+	Tokens.findByIdAndRemove(id, (err, results) => {
 		if (err) {
 			throwErrorLog(req.originalUrl, err)
 			res.send('An error occured. Check server logs for details.')

@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
 const Todos = require('../models/todoModel.js')
-const Users = require('../models/userModel.js')
+const Tokens = require('../models/tokenModel.js')
 const express = require('express')
 const router = express.Router()
 const throwErrorLog = require('../utilsFunctions').throwErrorLog
@@ -18,15 +18,17 @@ router.post('/', (req, res) => {
 })
 
 router.get('/:id', (req, res) => {
+	console.log(req.params)
 	Todos.find(
-		{userId: req.params.id},
+		{tokenId: req.params.id},
 		(err, results) => {
 			if (err) {
 				throwErrorLog(req.originalUrl, err)
 				res.send('An error occured. Check server logs for details.')
 				throw err
 			} else {
-				res.send(results)
+				//res.format('application/json')
+				res.json(results)
 			}
 		}
 	)

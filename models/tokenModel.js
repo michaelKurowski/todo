@@ -4,9 +4,9 @@ const Schema = mongoose.Schema
 
 const tokenSchema = new Schema({
 	value: {type: String, index: { unique: true }},
-	username: String
+	key: String
 })
 
-const Tokens = mongoose.model('Tokens', userSchema)
+const Tokens = mongoose.model('Tokens', tokenSchema)
 
 module.exports = Tokens
