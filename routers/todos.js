@@ -18,7 +18,6 @@ router.post('/', (req, res) => {
 })
 
 router.get('/:id', (req, res) => {
-	console.log(req.params)
 	Todos.find(
 		{tokenId: req.params.id},
 		(err, results) => {
